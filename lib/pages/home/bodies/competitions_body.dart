@@ -18,11 +18,15 @@ class _CompetitionBody extends State<CompetitionBody> {
     return ListView(
       children: [
         Padding(
-          padding: const EdgeInsets.all(24.0),
+          padding: const EdgeInsets.only(top: 24.0, bottom: 16.0, left: 24.0, right: 24.0),
           child: Row(
             children: [
               SelectableContainer(
-                  selected: _selected,
+                unselectedBackgroundColor: Color.fromRGBO(211, 145, 7, 0.5),
+                selectedBackgroundColor: Color.fromRGBO(211, 145, 7, 0.6),
+                unselectedBorderColor: Colors.black,
+                selectedBorderColor: Colors.black,
+                selected: _selected,
                   onValueChanged: (newValue){
                     setState((){
                       _selected = newValue;
@@ -32,8 +36,15 @@ class _CompetitionBody extends State<CompetitionBody> {
                 child: Container(
                   height: 150,
                   width: 150,
-                  child:Text(
-                      "Selectable Container Sized"
+                  child:Padding(
+                    padding: const EdgeInsets.all(24.0),
+                    child: Text(
+                        "Board Break",
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        fontSize: 36,
+                      ),
+                    ),
                   ),
                 ),
               ),
@@ -41,6 +52,8 @@ class _CompetitionBody extends State<CompetitionBody> {
                 flex: 1,
               ),
               SelectableContainer(
+                unselectedBorderColor: Colors.black,
+                selectedBorderColor: Colors.black,
                 selected: _selected,
                 onValueChanged: (newValue){
                   setState((){
@@ -61,54 +74,110 @@ class _CompetitionBody extends State<CompetitionBody> {
 
           ),
         ),
-        Row(),
+        Padding(
+          padding: const EdgeInsets.only(top: 16.0, bottom: 24.0, left: 24.0, right: 24.0),
+          child: Row(
+            children: [
+              SelectableContainer(
+                unselectedBorderColor: Colors.black,
+                selectedBorderColor: Colors.black,
+                selected: _selected,
+                onValueChanged: (newValue){
+                  setState((){
+                    _selected = newValue;
+                  });
+                },
+                padding: 8.0,
+                child: Container(
+                  height: 150,
+                  width: 150,
+                  child:Text(
+                      "Selectable Container Sized"
+                  ),
+                ),
+              ),
+              const Spacer(
+                flex: 1,
+              ),
+              SelectableContainer(
+                unselectedBorderColor: Colors.black,
+                selectedBorderColor: Colors.black,
+                selected: _selected,
+                onValueChanged: (newValue){
+                  setState((){
+                    _selected = newValue;
+                  });
+                },
+                padding: 8.0,
+                child: Container(
+                  height: 150,
+                  width: 150,
+                  child:Text(
+                      "Selectable Container Sized"
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
         Column(
           children: [
-            Stack(
-              children: [
-                 Align(
-                   alignment: Alignment.bottomCenter,
-                   child: SelectableContainer(
-                      selected: _selected,
-                      onValueChanged: (newValue){
-                        setState((){
-                          _selected = newValue;
-                        });
-                      },
-                      padding: 8.0,
-                      child: Container(
-                        height: 80,
-                        width: 350,
-                        child: Text(
-                            "VS Other"
-                        ),
-                      ),
-                    ),
+            SelectableContainer(
+              unselectedBorderColor: Colors.black,
+              unselectedBackgroundColor: Color.fromRGBO(255, 82, 82, 0.5),
+              selectedBackgroundColor: Color.fromRGBO(255, 82, 82, 0.8),
+              selectedBorderColor: Colors.black,
+              selected: _selected,
+               onValueChanged: (newValue){
+                 setState((){
+                   _selected = newValue;
+                 });
+               },
+               padding: 8.0,
+               child: Container(
+                 height: 80,
+                 width: 350,
+                 child: Padding(
+                   padding: const EdgeInsets.all(24.0),
+                   child: Text(
+                       "VS Other",
+                     textAlign: TextAlign.center,
+                     style: TextStyle(
+                       fontSize: 36,
+                     ),
+                   ),
                  ),
-              ],
-            ),
-            Stack(
-              children: [
-                Align(
-                  alignment: Alignment.bottomCenter,
-                  child: SelectableContainer(
-                    selected: _selected,
-                    onValueChanged: (newValue){
-                      setState((){
-                        _selected = newValue;
-                      });
-                    },
-                    padding: 8.0,
-                    child: Container(
-                      height: 80,
-                      width: 350,
-                      child: Text(
-                          "VS Friend"
-                      ),
+               ),
+             ),
+            SelectableContainer(
+              unselectedBackgroundColor: Color.fromRGBO(76, 175, 80, 0.5),
+              //76, 175, 80
+              selectedBackgroundColor: Color.fromRGBO(76, 175, 80, 0.8),
+
+
+              unselectedBorderColor: Colors.black,
+              selectedBorderColor: Colors.black,
+              selected: _selected,
+              onValueChanged: (newValue){
+                setState((){
+                  _selected = newValue;
+                });
+              },
+              padding: 8.0,
+              child: Container(
+                height: 80,
+                width: 350,
+                child: Padding(
+                  padding: const EdgeInsets.all(24.0),
+                  child: Text(
+                      "VS Friend",
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      fontSize: 36,
                     ),
                   ),
                 ),
-              ],
+              ),
             ),
           ],
         ),
