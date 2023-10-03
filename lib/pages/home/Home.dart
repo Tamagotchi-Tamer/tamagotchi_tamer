@@ -52,8 +52,8 @@ class _HomePageState extends State<HomePage>{
         'body': FriendsBody(),
       },
       4: {
-        'title': const Text("Other"),
-        'body': Text("Other body"),
+        'title': const Text("Fitness"),
+        'body': Text("Fitness body"),
       }
     };
 
@@ -104,7 +104,7 @@ class _HomePageState extends State<HomePage>{
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.adjust),
-            label: 'Other',
+            label: 'Fitness',
           ),
         ],
         currentIndex: _selectedIndex,
