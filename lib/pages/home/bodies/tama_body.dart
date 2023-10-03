@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'dart:math' as math;
 
+import '../../status/status.dart';
+
 class TamaBody extends StatelessWidget {
   const TamaBody({super.key});
 
@@ -28,16 +30,24 @@ class TamaBody extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   SizedBox(
-                    width: 45,
+                    width: 33,
                   ),
                     Container(
                       child: Transform.rotate(
                         angle: -math.pi/2,
-                        child: Text(
-                            "Stats",
+                        child: TextButton(
+                          onPressed: () { Navigator.push(
+                              context,
+                              MaterialPageRoute(builder: (context) => const Status())
+                          );
+                            }, child: Text(
+                            'Status',
                           style: TextStyle(
                             fontSize: 18,
-                          )
+                            color: Colors.black,
+                          ),
+                            ),
+
                         ),
                       ),
                     ),
