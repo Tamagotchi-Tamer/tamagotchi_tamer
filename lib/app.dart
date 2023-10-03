@@ -17,6 +17,21 @@ class MyApp extends StatelessWidget {
      animation: settingsController,
      builder: (BuildContext context, Widget? child) {
        return MaterialApp(
+         theme: ThemeData(
+           colorScheme: const ColorScheme(
+             brightness: Brightness.light,
+             primary: Color.fromRGBO(240, 0, 0, 20),
+             onPrimary: Colors.black,
+             secondary: Colors.grey,
+             onSecondary: Colors.grey,
+             background: Colors.grey,
+             onBackground: Colors.grey,
+             surface: Colors.grey,
+             onSurface: Colors.grey,
+             error: Colors.grey,
+             onError: Colors.grey,
+           ),
+         ),
          onGenerateRoute: (RouteSettings routeSettings) {
            return MaterialPageRoute<void>(
              settings: routeSettings,

@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:tamagotchi_tamer/pages/home/bodies/competitions_body.dart';
 import 'package:tamagotchi_tamer/pages/home/bodies/friends_body.dart';
 import 'package:tamagotchi_tamer/pages/home/bodies/tama_body.dart';
+
+import 'bodies/shop_body.dart';
 
 
 class HomePage extends StatefulWidget {
@@ -37,12 +40,20 @@ class _HomePageState extends State<HomePage>{
         //Tama body is where the tamagotchi is along with most of the animations as well
       },
       1:{
-        'title': const Text('Friends'),
-        'body': const FriendsBody(),
+        'title': const Text('Shop'),
+        'body': const ShopBody(),
       },
       2: {
-        'title': const Text('Other'),
-        'body': Text("Index 2"),
+        'title': const Text('Competition'),
+        'body': CompetitionBody(),
+      },
+      3: {
+        'title': const Text("Friends"),
+        'body': FriendsBody(),
+      },
+      4: {
+        'title': const Text("Other"),
+        'body': Text("Other body"),
       }
     };
 
@@ -50,17 +61,16 @@ class _HomePageState extends State<HomePage>{
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Tamagotchi Tamer"),
+        title: Transform(
+          transform: Matrix4.translationValues(-110.0, 0.0, 0.0),
+          child: const Text(
+            "Tamagotchi Tamer",
+            style: TextStyle(
+              color: Colors.white,
+            )
+          )
+        ),
         actions: <Widget>[
-          IconButton(
-            icon: const Icon(
-              Icons.search,
-              semanticLabel: 'search',
-            ),
-            onPressed: () {
-              print('Search Button');
-            },
-          ),
           IconButton(
             icon: const Icon(
             Icons.tune,
@@ -81,8 +91,16 @@ class _HomePageState extends State<HomePage>{
             label: 'home',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.people),
-            label: 'Friends',
+            icon: Icon(Icons.shop),
+            label: 'Shop'
+          ),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.warning),
+              label: 'Competition'
+          ),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.people),
+              label: 'Friends'
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.adjust),
