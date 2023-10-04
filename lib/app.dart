@@ -18,11 +18,13 @@ class MyApp extends StatelessWidget {
      animation: settingsController,
      builder: (BuildContext context, Widget? child) {
        return MaterialApp(
-         theme: ThemeData(
+         theme:
+
+         ThemeData(
            colorScheme: const ColorScheme(
              brightness: Brightness.light,
              primary: Color.fromRGBO(240, 0, 0, 20),
-             onPrimary: Colors.black,
+             onPrimary: Colors.white,
              secondary: Colors.grey,
              onSecondary: Colors.grey,
              background: Colors.grey,
