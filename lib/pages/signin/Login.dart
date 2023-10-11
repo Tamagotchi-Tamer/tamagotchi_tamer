@@ -26,10 +26,16 @@ class _LoginPageState extends State<LoginPage> {
             Column(
               children: <Widget>[
                 const SizedBox(height: 16.0),
-                Text('Login Text')
+                Text(
+                    'Tamagotchi Trainer Login',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontSize: 48,
+                  ),
+                )
               ],
             ),
-            const SizedBox(height: 120.0),
+            const SizedBox(height: 100.0),
             TextField(
               controller: _usernameController,
               decoration: const InputDecoration(
