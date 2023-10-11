@@ -3,6 +3,7 @@ import 'package:tamagotchi_tamer/pages/home/bodies/competitions_body.dart';
 import 'package:tamagotchi_tamer/pages/home/bodies/fitness_body.dart';
 import 'package:tamagotchi_tamer/pages/home/bodies/friends_body.dart';
 import 'package:tamagotchi_tamer/pages/home/bodies/tama_body.dart';
+import 'package:tamagotchi_tamer/data_model/user_db.dart';
 
 import 'bodies/shop_body.dart';
 
@@ -19,6 +20,10 @@ class HomePage extends StatefulWidget {
 
 
 class _HomePageState extends State<HomePage>{
+
+
+
+  //UserData userID = userDB.getUser(currentUserID);
 
   int _selectedIndex = 0;
 
@@ -50,7 +55,7 @@ class _HomePageState extends State<HomePage>{
       },
       3: {
         'title': const Text("Friends"),
-        'body': FriendsBody(),
+        'body': FriendsBody(userID: currentUserID,),
       },
       4: {
         'title': const Text("Fitness"),
