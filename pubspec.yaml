@@ -37,6 +37,7 @@ dependencies:
   selectable_container: ^1.0.7
   percent_indicator: ^4.2.3
   fl_chart: ^0.63.0
+  carousel_slider: ^4.2.1
 
 
 dev_dependencies:
@@ -68,6 +69,8 @@ flutter:
 
   assets:
     - assets/
+    - assets/cosmetics/
+    - assets/tamagotchi/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
