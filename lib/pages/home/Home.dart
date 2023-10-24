@@ -5,6 +5,7 @@ import 'package:tamagotchi_tamer/pages/home/bodies/friends_body.dart';
 import 'package:tamagotchi_tamer/pages/home/bodies/tama_body.dart';
 import 'package:tamagotchi_tamer/data_model/user_db.dart';
 
+import '../settings/settings_page.dart';
 import 'bodies/shop_body.dart';
 
 
@@ -83,7 +84,10 @@ class _HomePageState extends State<HomePage>{
               semanticLabel: 'filter',
           ),
             onPressed: () {
-              print('Filter button');
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => SettingsPage())
+              );
             }
           )
         ],
