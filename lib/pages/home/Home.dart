@@ -1,29 +1,27 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:tamagotchi_tamer/pages/home/bodies/competitions_body.dart';
 import 'package:tamagotchi_tamer/pages/home/bodies/fitness_body.dart';
 import 'package:tamagotchi_tamer/pages/home/bodies/friends_body.dart';
 import 'package:tamagotchi_tamer/pages/home/bodies/tama_body.dart';
 import 'package:tamagotchi_tamer/data_model/user_db.dart';
 
+import '../settings/settings_page.dart';
 import 'bodies/shop_body.dart';
 
 
-class HomePage extends StatefulWidget {
+class HomePage extends ConsumerStatefulWidget {
   const HomePage({super.key,});
 
   static const routeName = '/home';
 
   @override
-  State<HomePage> createState() => _HomePageState();
+  _HomePageState createState() => _HomePageState();
 
 }
 
 
-class _HomePageState extends State<HomePage>{
-
-
-
-  //UserData userID = userDB.getUser(currentUserID);
+class _HomePageState extends ConsumerState<HomePage>{
 
   int _selectedIndex = 0;
 
@@ -35,9 +33,12 @@ class _HomePageState extends State<HomePage>{
     }
   }
 
-
-
   Widget build(BuildContext context) {
+
+    UserDB userDB = ref.watch(userDBProvider);
+    String currentUserRef = ref.watch(currentUserIDProvider);
+
+    UserData currentUser = userDB.getUser(currentUserRef);
 
     final Map pages = {
       0: {
@@ -55,7 +56,7 @@ class _HomePageState extends State<HomePage>{
       },
       3: {
         'title': const Text("Friends"),
-        'body': FriendsBody(userID: currentUserID,),
+        'body': FriendsBody(),
       },
       4: {
         'title': const Text("Fitness"),
@@ -68,9 +69,9 @@ class _HomePageState extends State<HomePage>{
     return Scaffold(
       appBar: AppBar(
         title: Transform(
-          transform: Matrix4.translationValues(-110.0, 0.0, 0.0),
-          child: const Text(
-            "Tamagotchi Tamer",
+          transform: Matrix4.translationValues(-130.0, 0.0, 0.0),
+          child: Text(
+            currentUser.username,
             style: TextStyle(
               color: Colors.white,
             )
@@ -83,7 +84,9 @@ class _HomePageState extends State<HomePage>{
               semanticLabel: 'filter',
           ),
             onPressed: () {
-              print('Filter button');
+              Navigator.of(context).pushNamed(
+                SettingsPage.routeName
+              ).then((_) => setState(() {}));
             }
           )
         ],
