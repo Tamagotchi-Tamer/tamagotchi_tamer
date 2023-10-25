@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:tamagotchi_tamer/pages/home/bodies/competitions_body.dart';
 import 'package:tamagotchi_tamer/pages/home/bodies/fitness_body.dart';
 import 'package:tamagotchi_tamer/pages/home/bodies/friends_body.dart';
@@ -56,7 +57,7 @@ class _HomePageState extends State<HomePage>{
       },
       3: {
         'title': const Text("Friends"),
-        'body': FriendsBody(userID: currentUserID,),
+        'body': FriendsBody(),
       },
       4: {
         'title': const Text("Fitness"),
