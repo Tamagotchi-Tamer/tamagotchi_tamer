@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import 'edit_info.dart';
+
 class SettingsPage extends ConsumerWidget {
+
+  static const routeName = "/settings";
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
@@ -14,11 +18,12 @@ class SettingsPage extends ConsumerWidget {
             children:[
               ElevatedButton(
                 onPressed: () {
-                  //Go to form page
-
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => EditUserInfo())
+                  );
                 },
                 child: Text(
-                  "User Info",
+                  "Edit User Info",
                   style: TextStyle(
                       fontSize: 24
                   ),

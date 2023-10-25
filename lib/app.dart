@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:tamagotchi_tamer/pages/home/Home.dart';
 import 'package:tamagotchi_tamer/pages/page_not_found/page_not_found.dart';
 import 'package:tamagotchi_tamer/pages/settings/settings_controller.dart';
+import 'package:tamagotchi_tamer/pages/settings/settings_page.dart';
 import 'package:tamagotchi_tamer/pages/signin/Login.dart';
 import 'package:tamagotchi_tamer/pages/status/status.dart';
 
@@ -46,6 +47,8 @@ class MyApp extends StatelessWidget {
                    return const HomePage();
                  case Status.routeName:
                    return const Status();
+                 case SettingsPage.routeName:
+                   return SettingsPage();
                  default:
                    return const PageNotFound();
                }
