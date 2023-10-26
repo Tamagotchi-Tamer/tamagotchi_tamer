@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:tamagotchi_tamer/components/friends/friend_tile.dart';
+import 'package:tamagotchi_tamer/components/friends/user_tile.dart';
 import 'package:tamagotchi_tamer/data_model/user_db.dart';
+
+import '../../friends/friend_list.dart';
+import '../../friends/users_list.dart';
 
 class FriendsBody extends ConsumerStatefulWidget {
   const FriendsBody({super.key});
@@ -19,24 +22,68 @@ class _FriendsBodyState extends ConsumerState<FriendsBody>{
 
     UserDB userDB = ref.read(userDBProvider);
 
-    Widget friendList;
-    friendList = ListView.builder(
-        itemBuilder: (context, i) {
-          List<UserData> addUsers = userDB.allUsers();
-          String thisUser = addUsers[i].id;
-          return buildFriendListTile(thisUser);
-          //Pulls directly from user_db for the friends list
-        },
-      itemCount: userDB.length(),
-    );
 
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text(
-            "Friends"
-        ),
+    return Padding(
+      padding: const EdgeInsets.all(32),
+      child: ListView(
+        children: [
+          ElevatedButton(
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => UsersList())
+              );
+
+            },
+            child: Text(
+              "Users List",
+              style: TextStyle(
+                fontSize: 24,
+              ),
+            ),
+            style: ElevatedButton.styleFrom(
+                fixedSize: const Size(240, 80)
+            ),
+          ),
+          SizedBox(
+            height: 25,
+          ),
+          ElevatedButton(
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => FriendList())
+              );
+            },
+            child: Text(
+              "Friend List",
+              style: TextStyle(
+                fontSize: 24,
+              ),
+            ),
+            style: ElevatedButton.styleFrom(
+                fixedSize: const Size(240, 80)
+            ),
+          ),
+          SizedBox(
+            height: 25,
+          ),
+          ElevatedButton(
+            onPressed: () {
+
+            },
+            child: Text(
+              "Find a Friend",
+              style: TextStyle(
+                fontSize: 24,
+              ),
+            ),
+            style: ElevatedButton.styleFrom(
+                fixedSize: const Size(240, 80)
+            ),
+          )
+        ],
       ),
-      body: friendList,
     );
   }
 

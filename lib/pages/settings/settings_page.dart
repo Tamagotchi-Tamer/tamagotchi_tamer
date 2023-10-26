@@ -38,6 +38,25 @@ class SettingsPage extends ConsumerWidget {
               ElevatedButton(
                 onPressed: () {
                   Text(
+                    "Tamagotchi Info",
+                  );
+                },
+                child: Text(
+                  "Tamagotchi Info",
+                  style: TextStyle(
+                    fontSize: 24,
+                  ),
+                ),
+                style: ElevatedButton.styleFrom(
+                  fixedSize: const Size(240, 80),
+                ),
+              ),
+              SizedBox(
+                height: 25,
+              ),
+              ElevatedButton(
+                onPressed: () {
+                  Text(
                     "Sign out",
                   );
                 },
