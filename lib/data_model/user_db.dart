@@ -72,10 +72,9 @@ class UserDB {
   List<UserData> getUsers(List<String> userIDs) {
     return _users.where((userData) => userIDs.contains(userData.id)).toList();
   }
-  
-  List<UserData> allUsers() {
-    List<UserData> allData = [];
-    _users.forEach((userData) {allData.add(userData);});
+
+  List<UserData> otherUsers(String currentUserId) {
+    List<UserData> allData = _users.where((userData) => userData.id != currentUserId).toList();
     return allData;
   }
 

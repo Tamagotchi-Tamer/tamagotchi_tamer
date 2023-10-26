@@ -3,9 +3,9 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../data_model/user_db.dart';
 
-class FriendTile extends ConsumerWidget {
+class UserFriendTile extends ConsumerWidget {
 
-  FriendTile(this.currentUser);
+  UserFriendTile(this.currentUser);
 
 
   final String currentUser;
@@ -22,21 +22,25 @@ class FriendTile extends ConsumerWidget {
       ),
       title: Text(data.name),
       subtitle: Text(data.username),
-      trailing: Text("Other Feature"),
-
-     /*
-      ElevatedButton(
+      /*
+      trailing: ElevatedButton(
         onPressed: () {
         },
-        child: Icon(Icons.add),
+        child: Icon(Icons.check),
         style: ElevatedButton.styleFrom(
           shape: const CircleBorder(),
           backgroundColor: Colors.white,
           foregroundColor: Colors.redAccent,
         ),
-      ),
 
-      */
+
+      ),
+       */
+      trailing: Container(
+        width: 60,
+          child: Icon(Icons.check)
+
+      ),
     );
   }
 
