@@ -1,3 +1,4 @@
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class CosmeticData {
 
@@ -17,6 +18,11 @@ class CosmeticData {
 }
 
 class CosmeticDB {
+
+  CosmeticDB(this.ref);
+  final ProviderRef<CosmeticDB>ref;
+
+
   final List<CosmeticData> cosmetics = [
     CosmeticData(
         ID: 10,
@@ -52,4 +58,8 @@ class CosmeticDB {
 }
 
 /// The singleton instance of a cosmeticDB used by clients to access cosmetic data.
-CosmeticDB cosmeticDB = CosmeticDB();
+//CosmeticDB cosmeticDB = CosmeticDB();
+
+final cosmeticDBProvider = Provider<CosmeticDB>((ref) {
+  return CosmeticDB(ref);
+});

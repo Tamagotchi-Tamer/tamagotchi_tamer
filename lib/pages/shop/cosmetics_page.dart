@@ -1,11 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:tamagotchi_tamer/data_model/cosmetic_db.dart';
 
-class Cosmetics extends StatelessWidget {
+class Cosmetics extends ConsumerWidget {
+
+
 
   static const routeName = '/cosmetics';
 
-  const Cosmetics({super.key});
+  Cosmetics({super.key});
+
+  late CosmeticDB cosmeticDB;
 
   List<Card> _buildGridCards(BuildContext context) {
     List<CosmeticData> cosmeticsList =  cosmeticDB.getAllCosmetics();
@@ -59,7 +64,11 @@ class Cosmetics extends StatelessWidget {
 
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+
+    cosmeticDB = ref.read(cosmeticDBProvider);
+
+
     return Scaffold(
       appBar: AppBar(
         title: Text("Cosmetics"),
