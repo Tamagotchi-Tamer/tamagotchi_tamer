@@ -1,12 +1,12 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:tamagotchi_tamer/pages/home/Home.dart';
-import 'package:tamagotchi_tamer/pages/page_not_found/page_not_found.dart';
-import 'package:tamagotchi_tamer/pages/settings/settings_controller.dart';
-import 'package:tamagotchi_tamer/pages/settings/settings_page.dart';
-import 'package:tamagotchi_tamer/pages/signin/Login.dart';
-import 'package:tamagotchi_tamer/pages/status/status.dart';
+import 'package:tamagotchi_tamer/features/home/presentation/Home.dart';
+import 'package:tamagotchi_tamer/features/page_not_found/presentation/page_not_found.dart';
+import 'package:tamagotchi_tamer/features/settings/presentation/settings_controller.dart';
+import 'package:tamagotchi_tamer/features/settings/presentation/settings_page.dart';
+import 'package:tamagotchi_tamer/features/authentication/presentation/Login.dart';
+import 'package:tamagotchi_tamer/features/home/presentation/status.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key, required this.settingsController});
