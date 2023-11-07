@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1004559604026",
+    "project_id": "tamagotchi-tamer",
+    "storage_bucket": "tamagotchi-tamer.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1004559604026:android:3a5023e8ed0bd9b93bd803",
+        "android_client_info": {
+          "package_name": "com.example.tamagotchi_tamer"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCHkyv1gHGfRFUgfFqxwTqf5B5m1qLy6fQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
