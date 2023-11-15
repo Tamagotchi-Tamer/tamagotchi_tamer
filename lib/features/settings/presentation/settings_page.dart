@@ -1,5 +1,7 @@
+import 'package:firebase_ui_auth/firebase_ui_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:tamagotchi_tamer/features/authentication/presentation/Login.dart';
 
 import 'edit_info.dart';
 
@@ -56,6 +58,8 @@ class SettingsPage extends ConsumerWidget {
               ),
               ElevatedButton(
                 onPressed: () {
+                  FirebaseUIAuth.signOut(context: context);
+                  Navigator.pushReplacementNamed(context, LoginPage.routeName);
                   Text(
                     "Sign out",
                   );

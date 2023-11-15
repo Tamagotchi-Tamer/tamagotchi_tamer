@@ -8,6 +8,9 @@ import 'package:tamagotchi_tamer/features/settings/presentation/settings_page.da
 import 'package:tamagotchi_tamer/features/authentication/presentation/Login.dart';
 import 'package:tamagotchi_tamer/features/home/presentation/status.dart';
 
+import 'features/authentication/presentation/forgot_password.dart';
+import 'features/authentication/presentation/verify_email.dart';
+
 class MyApp extends StatelessWidget {
   const MyApp({super.key, required this.settingsController});
 
@@ -43,6 +46,10 @@ class MyApp extends StatelessWidget {
                switch (routeSettings.name) {
                  case LoginPage.routeName:
                    return LoginPage();
+                 case VerifyEmailView.routeName:
+                   return const VerifyEmailView();
+                 case ForgotPassword.routeName:
+                   return const ForgotPassword();
                  case HomePage.routeName:
                    return const HomePage();
                  case Status.routeName:
