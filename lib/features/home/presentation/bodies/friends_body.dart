@@ -21,9 +21,6 @@ class _FriendsBodyState extends ConsumerState<FriendsBody>{
   @override
   Widget build(BuildContext context) {
 
-    UserDB userDB = ref.read(userDBProvider);
-
-
     return Padding(
       padding: const EdgeInsets.all(32),
       child: ListView(

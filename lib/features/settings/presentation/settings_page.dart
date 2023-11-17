@@ -1,8 +1,13 @@
+import 'package:firebase_auth/firebase_auth.dart' hide User;
 import 'package:firebase_ui_auth/firebase_ui_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:tamagotchi_tamer/features/authentication/presentation/Login.dart';
+import 'package:tamagotchi_tamer/features/users/domain/user.dart';
 
+import '../../all_data_provider.dart';
+import '../../tt_error.dart';
+import '../../tt_loading.dart';
 import 'edit_info.dart';
 
 class SettingsPage extends ConsumerWidget {
@@ -10,6 +15,19 @@ class SettingsPage extends ConsumerWidget {
   static const routeName = "/settings";
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final AsyncValue<AllData> asyncAllData = ref.watch(allDataProvider);
+    return asyncAllData.when(
+        data: (allData) =>
+            _build(
+                context: context,
+                currentUserID: allData.currentUserID,
+                users: allData.users,
+                ref: ref),
+        loading: () => const TTLoading(),
+        error: (e, st) => TTError(e.toString(), st.toString()));
+  }
+
+  Widget _build({required BuildContext context, required String currentUserID, required List<User> users, required WidgetRef ref}) {
     return Scaffold(
       appBar: AppBar(
         title: const Text("Settings"),

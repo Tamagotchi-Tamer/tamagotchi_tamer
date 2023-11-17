@@ -4,9 +4,14 @@ import 'package:tamagotchi_tamer/features/home/presentation/bodies/competitions_
 import 'package:tamagotchi_tamer/features/home/presentation/bodies/fitness_body.dart';
 import 'package:tamagotchi_tamer/features/home/presentation/bodies/friends_body.dart';
 import 'package:tamagotchi_tamer/features/home/presentation/bodies/tama_body.dart';
+import 'package:tamagotchi_tamer/features/users/domain/user.dart';
+import 'package:tamagotchi_tamer/features/users/domain/user_collection.dart';
 import 'package:tamagotchi_tamer/features/users/domain/user_db.dart';
 
+import '../../all_data_provider.dart';
 import '../../settings/presentation/settings_page.dart';
+import '../../tt_error.dart';
+import '../../tt_loading.dart';
 import '../../users/data/user_providers.dart';
 import 'bodies/shop_body.dart';
 
@@ -35,12 +40,19 @@ class _HomePageState extends ConsumerState<HomePage>{
   }
 
   Widget build(BuildContext context) {
+    final AsyncValue<AllData> asyncAllData = ref.watch(allDataProvider);
+    return asyncAllData.when(
+        data: (allData) =>
+            _build(
+                context: context,
+                currentUserID: allData.currentUserID,
+                users: allData.users,
+                ref: ref),
+        loading: () => const TTLoading(),
+        error: (e, st) => TTError(e.toString(), st.toString()));
+  }
 
-    UserDB userDB = ref.watch(userDBProvider);
-    String currentUserRef = ref.watch(currentUserIDProvider);
-
-    UserData currentUser = userDB.getUser(currentUserRef);
-
+  Widget _build({required BuildContext context, required String currentUserID, required List<User> users, required WidgetRef ref}) {
     final Map pages = {
       0: {
         'title': const Text("Home"),
@@ -66,13 +78,14 @@ class _HomePageState extends ConsumerState<HomePage>{
     };
 
 
+    UserCollection userCollection = UserCollection(users);
 
     return Scaffold(
       appBar: AppBar(
         title: Transform(
           transform: Matrix4.translationValues(-130.0, 0.0, 0.0),
           child: Text(
-            currentUser.username,
+            userCollection.getUser(currentUserID).username,
             style: TextStyle(
               color: Colors.white,
             )

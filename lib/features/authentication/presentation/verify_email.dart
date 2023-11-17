@@ -1,6 +1,7 @@
 import 'package:firebase_ui_auth/firebase_ui_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:tamagotchi_tamer/features/authentication/presentation/Login.dart';
+import 'package:tamagotchi_tamer/features/authentication/presentation/register_user_info.dart';
 import 'package:tamagotchi_tamer/features/home/presentation/Home.dart';
 
 import 'decorations.dart';
@@ -19,7 +20,7 @@ class VerifyEmailView extends StatelessWidget {
       sideBuilder: sideIcon(Icons.verified),
       actions: [
         EmailVerifiedAction(() {
-          Navigator.pushReplacementNamed(context, HomePage.routeName);
+          Navigator.pushReplacementNamed(context, RegisterUserInfo.routeName);
         }),
         AuthCancelledAction((context) {
           FirebaseUIAuth.signOut(context: context);
