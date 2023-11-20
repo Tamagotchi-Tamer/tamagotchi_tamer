@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:tamagotchi_tamer/features/users/domain/user_collection.dart';
 
+import '../../all_data_provider.dart';
+import '../../tt_error.dart';
+import '../../tt_loading.dart';
 import '../data/user_providers.dart';
+import '../domain/user.dart';
 import 'user_tile.dart';
 import '../domain/user_db.dart';
 
@@ -11,23 +16,33 @@ class UsersList extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final AsyncValue<AllData> asyncAllData = ref.watch(allDataProvider);
+    return asyncAllData.when(
+        data: (allData) =>
+            _build(
+                context: context,
+                currentUserID: allData.currentUserID,
+                users: allData.users),
+        loading: () => const TTLoading(),
+        error: (error, st) => TTError(error.toString(), st.toString()));
+  }
 
+  Widget _build({
+    required BuildContext context,
+    required String currentUserID,
+    required List<User> users,
+}) {
 
-    UserDB userDB = ref.read(userDBProvider);
-    String currentUserRef = ref.watch(currentUserIDProvider);
-    UserData currentUser = userDB.getUser(currentUserRef);
-
-    ref.watch(userDBProvider);
+    UserCollection userCollection = UserCollection(users);
 
     Widget userList;
     userList = ListView.builder(
       itemBuilder: (context, i) {
-        List<UserData> addUsers = userDB.otherUsers(currentUser.id);
+        List<User> addUsers = userCollection.otherUsers(currentUserID);
         String thisUser = addUsers[i].id;
-        return buildFriendListTile(ref, thisUser);
-        //Pulls directly from user_db for the friends list
+        return buildFriendListTile(key, thisUser);
       },
-      itemCount: userDB.length() - 1,
+      itemCount: userCollection.length() - 1,
     );
 
     return Scaffold(

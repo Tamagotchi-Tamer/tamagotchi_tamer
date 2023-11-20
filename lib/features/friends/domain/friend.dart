@@ -1,16 +1,16 @@
-import 'package:flutter/material.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 
-class Friend {
+part 'friend.freezed.dart';
+part 'friend.g.dart';
 
-  Friend({
-    required this.userID,
-    required this.name,
-    required this.email,
-  });
+@Freezed()
+class Friend with _$Friend {
 
-  final int userID;
-  final String name;
-  final String email;
+  const factory Friend({
+    required String id,
+    required String name,
+  }) = _User;
 
+  factory Friend.fromJson(Map<String, dynamic> json) => _$FriendFromJson(json);
 
 }

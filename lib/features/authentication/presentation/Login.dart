@@ -1,10 +1,23 @@
+import 'package:firebase_auth/firebase_auth.dart' hide User;
 import 'package:firebase_ui_auth/firebase_ui_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:tamagotchi_tamer/features/all_data_provider.dart';
+import 'package:tamagotchi_tamer/features/authentication/presentation/register_user_info.dart';
 import 'package:tamagotchi_tamer/features/authentication/presentation/verify_email.dart';
 import 'package:tamagotchi_tamer/features/home/presentation/Home.dart';
 import 'package:tamagotchi_tamer/features/authentication/presentation/forgot_password.dart';
+import 'package:tamagotchi_tamer/features/users/data/user_data_provider.dart';
+import 'package:tamagotchi_tamer/features/users/data/user_database.dart';
+import 'package:tamagotchi_tamer/features/users/domain/user.dart';
+import 'package:tamagotchi_tamer/features/users/domain/user_collection.dart';
 
-class LoginPage extends StatelessWidget {
+import '../../../repositories/firestore/firestore_providers.dart';
+import '../../tt_error.dart';
+import '../../tt_loading.dart';
+import '../../users/data/user_providers.dart';
+
+class LoginPage extends ConsumerWidget {
 
   const LoginPage({Key? key}) : super(key: key);
 
@@ -12,8 +25,26 @@ class LoginPage extends StatelessWidget {
 
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
 
+
+    final AsyncValue<UserData> asyncAllData = ref.watch(userDataProvider);
+    return asyncAllData.when(
+        data: (allData) =>
+            _build(
+                context: context,
+                users: allData.users,
+                ref: ref),
+        loading: () => const TTLoading(),
+        error: (e, st) => TTError(e.toString(), st.toString()));
+  }
+  Widget _build({required BuildContext context, required List<User> users, required WidgetRef ref}) {
+
+    UserCollection userCollection = UserCollection(users);
+
+    bool userExists(String email) {
+      return userCollection.getUserByEmail(email) != null;
+    }
 
     return SignInScreen(
       actions: [
@@ -27,15 +58,17 @@ class LoginPage extends StatelessWidget {
         AuthStateChangeAction<SignedIn>((context, state) {
           if (!state.user!.emailVerified) {
             Navigator.pushNamed(context, VerifyEmailView.routeName);
-          } else {
+          } else if (userExists(state.user!.email!)) {
             Navigator.pushReplacementNamed(context, HomePage.routeName);
+          } else {
+            Navigator.pushReplacementNamed(context, RegisterUserInfo.routeName);
           }
         }),
         AuthStateChangeAction<UserCreated>((context, state) {
           if (!state.credential.user!.emailVerified) {
             Navigator.pushNamed(context, VerifyEmailView.routeName);
           } else {
-            Navigator.pushReplacementNamed(context, HomePage.routeName);
+            Navigator.pushReplacementNamed(context, RegisterUserInfo.routeName);
           }
         }),
         AuthStateChangeAction<CredentialLinked>((context, state) {
@@ -43,7 +76,7 @@ class LoginPage extends StatelessWidget {
             Navigator.pushNamed(context, VerifyEmailView.routeName);
           } else {
             Navigator.pushReplacementNamed(context, HomePage.routeName);
-          }
+            }
         }),
       ],
       styles: const {
@@ -60,7 +93,7 @@ class LoginPage extends StatelessWidget {
             action == AuthAction.signIn
                 ? 'Welcome to Tamagotchi Tamer! Please sign in.'
                 : 'Welcome to Tamagotchi Tamer! Please create an account.',
-          ),
+          )
         );
       },
       footerBuilder: (context, action) {
