@@ -40,8 +40,8 @@ class UserCollection {
   }
 
   List<User> otherUsers(String currentUserId) {
-    List<User> allData = _users.where((userData) => userData.id != currentUserId).toList();
-    return allData;
+    List<User> allUsers = _users.where((userData) => userData.id != currentUserId).toList();
+    return allUsers;
   }
 
   List<String> getEmails() {

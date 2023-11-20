@@ -41,7 +41,6 @@ class UsersList extends ConsumerWidget {
         List<User> addUsers = userCollection.otherUsers(currentUserID);
         String thisUser = addUsers[i].id;
         return buildFriendListTile(key, thisUser);
-        //Pulls directly from user_db for the friends list
       },
       itemCount: userCollection.length() - 1,
     );

@@ -33,7 +33,7 @@ class UserFriendTile extends ConsumerWidget {
 
     UserCollection userCollection = UserCollection(users);
 
-    var data = userCollection.getUser(currentUserID);
+    var data = userCollection.getUser(currentUser);
 
     return ListTile(
       leading: CircleAvatar(

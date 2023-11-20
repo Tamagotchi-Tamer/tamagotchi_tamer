@@ -36,7 +36,7 @@ class plusTile extends ConsumerWidget {
   Widget _build({required BuildContext context, required String currentUserID, required List<User> users}) {
     UserCollection userCollection = UserCollection(users);
 
-    var data = userCollection.getUser(currentUserID);
+    var data = userCollection.getUser(currentUser);
 
     return ListTile(
       leading: CircleAvatar(
