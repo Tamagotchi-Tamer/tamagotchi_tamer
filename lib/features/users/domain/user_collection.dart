@@ -43,4 +43,18 @@ class UserCollection {
     List<User> allData = _users.where((userData) => userData.id != currentUserId).toList();
     return allData;
   }
+
+  List<String> getEmails() {
+    return _users.map((data) => data.email).toList();
+  }
+
+  User? getUserByEmail(String email) {
+    if(getEmails().contains(email)) {
+      return _users.firstWhere((data) => data.email == email);
+    }
+    else {
+      return null;
+    }
+  }
+
 }

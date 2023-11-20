@@ -4,10 +4,13 @@ class FriendCollection {
 
   FriendCollection(friends) : _friends = friends;
 
-  final Map<String, List<Friend>> _friends;
+  //final Map<String, List<Friend>> _friends;
+
+  final List<Friend> _friends;
 
   List<Friend> getFriends(String userID) {
-    return _friends[userID] ?? [];
+    //return _friends[userID] ?? [];
+    return _friends;
   }
 
   int getNumberOfFriends(String userID) {
@@ -20,6 +23,7 @@ class FriendCollection {
     return friendsList.any((friend) => friend.id == userIDToCheck);
   }
 
+  /*
   void addFriend(String userID, Friend friend) {
     if (_friends.containsKey(userID)) {
       // Check if the user is already friends with the given friend.
@@ -31,5 +35,7 @@ class FriendCollection {
       _friends[userID] = [friend];
     }
   }
+
+   */
 
 }

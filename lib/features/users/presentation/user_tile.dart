@@ -86,7 +86,7 @@ class _buildFriendListTileState extends ConsumerState<buildFriendListTile> {
 
           Friend newFriend = Friend(id: friendToAdd.id, name: friendToAdd.name);
 
-          friendCollection.addFriend(currentUserID, newFriend);
+          //friendCollection.addFriend(currentUserID, newFriend);
 
 
           buildTile = UserFriendTile(widget.currentUser);

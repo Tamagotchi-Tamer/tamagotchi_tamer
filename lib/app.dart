@@ -1,6 +1,7 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:tamagotchi_tamer/features/authentication/presentation/register_user_info.dart';
 import 'package:tamagotchi_tamer/features/home/presentation/Home.dart';
 import 'package:tamagotchi_tamer/features/page_not_found/presentation/page_not_found.dart';
 import 'package:tamagotchi_tamer/features/settings/presentation/settings_controller.dart';
@@ -48,6 +49,8 @@ class MyApp extends StatelessWidget {
                    return LoginPage();
                  case VerifyEmailView.routeName:
                    return const VerifyEmailView();
+                 case RegisterUserInfo.routeName:
+                   return RegisterUserInfo();
                  case ForgotPassword.routeName:
                    return const ForgotPassword();
                  case HomePage.routeName:

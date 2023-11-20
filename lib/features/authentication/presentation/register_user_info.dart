@@ -95,7 +95,7 @@ class RegisterUserInfo extends ConsumerWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text("Change User Info"),
+        title: Text("Register User Info"),
       ),
       body: ListView(
         padding: const EdgeInsets.all(32),

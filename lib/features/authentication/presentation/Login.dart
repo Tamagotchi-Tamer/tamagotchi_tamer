@@ -1,4 +1,4 @@
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_auth/firebase_auth.dart' hide User;
 import 'package:firebase_ui_auth/firebase_ui_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -7,9 +7,12 @@ import 'package:tamagotchi_tamer/features/authentication/presentation/register_u
 import 'package:tamagotchi_tamer/features/authentication/presentation/verify_email.dart';
 import 'package:tamagotchi_tamer/features/home/presentation/Home.dart';
 import 'package:tamagotchi_tamer/features/authentication/presentation/forgot_password.dart';
+import 'package:tamagotchi_tamer/features/users/domain/user.dart';
 import 'package:tamagotchi_tamer/features/users/domain/user_collection.dart';
 
 import '../../../repositories/firestore/firestore_providers.dart';
+import '../../tt_error.dart';
+import '../../tt_loading.dart';
 import '../../users/data/user_providers.dart';
 
 class LoginPage extends ConsumerWidget {
@@ -21,7 +24,25 @@ class LoginPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final AsyncValue<AllData> asyncAllData = ref.watch(allDataProvider);
+    return asyncAllData.when(
+        data: (allData) =>
+            _build(
+                context: context,
+                currentUserID: allData.currentUserID,
+                users: allData.users,
+                ref: ref),
+        loading: () => const TTLoading(),
+        error: (e, st) => TTError(e.toString(), st.toString()));
 
+  }
+
+  Widget _build({required BuildContext context, required String currentUserID, required WidgetRef ref, required List<User> users}) {
+
+    UserCollection userCollection = UserCollection((users));
+    bool userExists(String email) {
+      return userCollection.getUserByEmail(email) != null;
+    }
 
     return SignInScreen(
       actions: [
@@ -35,15 +56,18 @@ class LoginPage extends ConsumerWidget {
         AuthStateChangeAction<SignedIn>((context, state) {
           if (!state.user!.emailVerified) {
             Navigator.pushNamed(context, VerifyEmailView.routeName);
-          } else {
+          } else if (userExists(state.user!.email!)) {
             Navigator.pushReplacementNamed(context, HomePage.routeName);
+          } else {
+            Navigator.pushReplacementNamed(context, RegisterUserInfo.routeName);
+
           }
         }),
         AuthStateChangeAction<UserCreated>((context, state) {
           if (!state.credential.user!.emailVerified) {
             Navigator.pushNamed(context, VerifyEmailView.routeName);
           } else {
-            Navigator.pushReplacementNamed(context, HomePage.routeName);
+            Navigator.pushReplacementNamed(context, RegisterUserInfo.routeName);
           }
         }),
         AuthStateChangeAction<CredentialLinked>((context, state) {
