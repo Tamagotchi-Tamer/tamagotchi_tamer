@@ -7,6 +7,8 @@ import 'package:tamagotchi_tamer/features/authentication/presentation/register_u
 import 'package:tamagotchi_tamer/features/authentication/presentation/verify_email.dart';
 import 'package:tamagotchi_tamer/features/home/presentation/Home.dart';
 import 'package:tamagotchi_tamer/features/authentication/presentation/forgot_password.dart';
+import 'package:tamagotchi_tamer/features/users/data/user_data_provider.dart';
+import 'package:tamagotchi_tamer/features/users/data/user_database.dart';
 import 'package:tamagotchi_tamer/features/users/domain/user.dart';
 import 'package:tamagotchi_tamer/features/users/domain/user_collection.dart';
 
@@ -24,22 +26,22 @@ class LoginPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final AsyncValue<AllData> asyncAllData = ref.watch(allDataProvider);
+
+
+    final AsyncValue<UserData> asyncAllData = ref.watch(userDataProvider);
     return asyncAllData.when(
         data: (allData) =>
             _build(
                 context: context,
-                currentUserID: allData.currentUserID,
                 users: allData.users,
                 ref: ref),
         loading: () => const TTLoading(),
         error: (e, st) => TTError(e.toString(), st.toString()));
-
   }
+  Widget _build({required BuildContext context, required List<User> users, required WidgetRef ref}) {
 
-  Widget _build({required BuildContext context, required String currentUserID, required WidgetRef ref, required List<User> users}) {
+    UserCollection userCollection = UserCollection(users);
 
-    UserCollection userCollection = UserCollection((users));
     bool userExists(String email) {
       return userCollection.getUserByEmail(email) != null;
     }
@@ -60,7 +62,6 @@ class LoginPage extends ConsumerWidget {
             Navigator.pushReplacementNamed(context, HomePage.routeName);
           } else {
             Navigator.pushReplacementNamed(context, RegisterUserInfo.routeName);
-
           }
         }),
         AuthStateChangeAction<UserCreated>((context, state) {
