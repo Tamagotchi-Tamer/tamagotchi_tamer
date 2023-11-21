@@ -26,7 +26,7 @@ class Status extends StatelessWidget {
                         Container(
                             height: 150,
                             width: 150,
-                            child: Image.asset('assets/pika_test.webp')
+                            child: Image.asset('assets/tamagotchi/tama1.png')
                         ),
                         Spacer(
                           flex: 1,
