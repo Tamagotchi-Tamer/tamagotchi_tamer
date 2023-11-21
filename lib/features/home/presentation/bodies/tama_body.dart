@@ -81,6 +81,10 @@ class TamaBody extends StatelessWidget {
                 ],
               ),
             ),
+            SizedBox(
+              height: 175,
+            ),
+            Image.asset("assets/tamagotchi/tama1.png"),
           ],
         ),
       ],
