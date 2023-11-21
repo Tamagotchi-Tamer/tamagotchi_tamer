@@ -4,6 +4,7 @@ import 'package:tamagotchi_tamer/features/home/presentation/bodies/competitions_
 import 'package:tamagotchi_tamer/features/home/presentation/bodies/fitness_body.dart';
 import 'package:tamagotchi_tamer/features/home/presentation/bodies/friends_body.dart';
 import 'package:tamagotchi_tamer/features/home/presentation/bodies/tama_body.dart';
+import 'package:tamagotchi_tamer/features/settings_dropdown.dart';
 import 'package:tamagotchi_tamer/features/users/domain/user.dart';
 import 'package:tamagotchi_tamer/features/users/domain/user_collection.dart';
 import 'package:tamagotchi_tamer/features/users/domain/user_db.dart';
@@ -81,6 +82,7 @@ class _HomePageState extends ConsumerState<HomePage>{
     UserCollection userCollection = UserCollection(users);
 
     return Scaffold(
+      endDrawer: const SettingsDropdown(),
       appBar: AppBar(
         title: Transform(
           transform: Matrix4.translationValues(-130.0, 0.0, 0.0),
@@ -91,6 +93,7 @@ class _HomePageState extends ConsumerState<HomePage>{
             )
           )
         ),
+        /*
         actions: <Widget>[
           IconButton(
             icon: const Icon(
@@ -104,6 +107,8 @@ class _HomePageState extends ConsumerState<HomePage>{
             }
           )
         ],
+
+         */
       ),
       body: pages[_selectedIndex]['body'],
       bottomNavigationBar: BottomNavigationBar(
